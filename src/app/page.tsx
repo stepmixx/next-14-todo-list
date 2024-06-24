@@ -1,8 +1,7 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
-import { DeleteTodoBtn } from "@/components/forms/delete-todo-btn.form";
 import { AddTodoForm } from "@/components/forms/add-todo.form";
+import { TodoCard } from "@/components/todo-card.component";
 import { TodoService } from "@/db/services/todo.service";
-import { SelectTodo } from "@/db/schema";
+import { Box, Typography } from "@mui/material";
 
 export default async function Home() {
   const todos = await TodoService.getTodos();
@@ -51,32 +50,5 @@ export default async function Home() {
         </Box>
       </Box>
     </main>
-  );
-}
-
-function TodoCard({ todo }: { todo: SelectTodo }) {
-  return (
-    <Card
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "8px",
-      }}
-    >
-      <CardContent
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Box>
-          <Typography variant="h3">{todo.title}</Typography>
-          <Typography>{todo.description}</Typography>
-        </Box>
-        <DeleteTodoBtn id={todo.id} />
-      </CardContent>
-    </Card>
   );
 }
